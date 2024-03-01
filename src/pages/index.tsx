@@ -1,6 +1,6 @@
 import { type NextPage } from "next";
 
-import { SignInButton, useUser } from "@clerk/nextjs";
+import { SignInButton, SignOutButton, useUser } from "@clerk/nextjs";
 
 import Image from "next/image";
 import { useState } from "react";
@@ -107,7 +107,12 @@ const Home: NextPage = () => {
               <SignInButton />
             </div>
           )}
-          {isSignedIn && <CreatePostWizard />}
+          {isSignedIn && (
+            <div className="flex w-full">
+              <CreatePostWizard />
+              <SignOutButton />
+            </div>
+          )}
         </div>
 
         <Feed />
