@@ -1,14 +1,11 @@
 import type { GetStaticProps, NextPage } from "next";
-import superjson from "superjson";
 
-import { createServerSideHelpers } from "@trpc/react-query/server";
 import Head from "next/head";
 import Image from "next/image";
 import PageLayout from "~/components/layout";
 import { LoadingPage } from "~/components/loading";
 import PostView from "~/components/postView";
-import { appRouter } from "~/server/api/root";
-import { db } from "~/server/db";
+import { generateSSGHelper } from "~/server/helpers/ssgHelper";
 import { api } from "~/utils/api";
 
 const ProfileFeed = (props: { userId: string }) => {
@@ -61,11 +58,7 @@ const ProfilePage: NextPage<{ username: string }> = ({ username }) => {
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const ssg = createServerSideHelpers({
-    router: appRouter,
-    ctx: { db, userId: null },
-    transformer: superjson, // optional - adds superjson serialization
-  });
+  const ssg = generateSSGHelper();
 
   const slug = context.params?.slug as string;
 
