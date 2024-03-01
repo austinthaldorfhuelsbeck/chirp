@@ -6,9 +6,7 @@ const SinglePostPage: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Chirp</title>
-        <meta name="description" content="Emoji social media platform" />
-        <link rel="icon" href="/favicon.ico" />
+        <title>Post</title>
       </Head>
       <main className="flex h-screen justify-center">
         <div>Post View</div>

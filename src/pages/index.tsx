@@ -3,11 +3,11 @@ import { type NextPage } from "next";
 
 import { SignInButton, useUser } from "@clerk/nextjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import PageLayout from "~/components/layout";
 import { LoadingPage, LoadingSpinner } from "~/components/loading";
 import { api, type RouterOutputs } from "~/utils/api";
 
@@ -132,25 +132,18 @@ const Home: NextPage = () => {
 
   return (
     <>
-      <Head>
-        <title>Chirp</title>
-        <meta name="description" content="Emoji social media platform" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <main className="flex h-screen justify-center">
-        <div className="h-full w-full border-x border-slate-400 md:max-w-2xl">
-          <div className="flex border-b border-slate-400 p-4">
-            {!isSignedIn && (
-              <div className="flex justify-center">
-                <SignInButton />
-              </div>
-            )}
-            {isSignedIn && <CreatePostWizard />}
-          </div>
-
-          <Feed />
+      <PageLayout>
+        <div className="flex border-b border-slate-400 p-4">
+          {!isSignedIn && (
+            <div className="flex justify-center">
+              <SignInButton />
+            </div>
+          )}
+          {isSignedIn && <CreatePostWizard />}
         </div>
-      </main>
+
+        <Feed />
+      </PageLayout>
     </>
   );
 };
